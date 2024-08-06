@@ -1,4 +1,7 @@
-lua/modules/plugins/custom.lua
-lua/modules/configs/custom
-lua/user
-result
+tags
+test.sh
+.luarc.json
+nvim
+
+spell/
+lazy-lock.json
