@@ -36,9 +36,10 @@ return {
         header = vim.split(logo, '\n'),
         -- stylua: ignore
         center = {
+          { action = 'Telescope oldfiles',                               desc = ' Recent Files',    icon = ' ',  key = 'r' },
           { action = 'Telescope find_files search_dirs=~/.config/nvim/', desc = ' Config',          icon = ' ',  key = 'c' },
           { action = 'Lazy',                                             desc = ' Lazy',            icon = '󰒲 ',  key = 'l' },
-          { action = function() vim.api.nvim_input("<cmd>qa<cr>") end,   desc = " Quit",            icon = " ", key = "q" },
+          { action = function() vim.api.nvim_input('<cmd>qa<cr>') end,   desc = ' Quit',            icon = ' ',  key = 'q' },
 
         },
         footer = require('fortune').get_fortune(),
@@ -65,7 +66,7 @@ return {
 
     -- change the color of the header
     vim.api.nvim_set_hl(0, 'DashboardHeader', {
-      fg = '#ffffff',
+      fg = '#cdd6f4',
     })
 
     return opts
