@@ -15,6 +15,13 @@ return {
           end
           return 'make install_jsregexp'
         end)(),
+        config = function()
+          require('luasnip').config.set_config {
+            enable_autosnippets = true,
+          }
+          require('luasnip.loaders.from_lua').lazy_load { paths = './luasnippets' }
+          require('luasnip.loaders.from_lua').load { lazy_paths = './luasnippets' }
+        end,
         dependencies = {
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:

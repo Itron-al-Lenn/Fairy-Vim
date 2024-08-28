@@ -6,6 +6,7 @@ return {
     icons = require 'util.icons'
     require('lualine').setup {
       options = {
+        theme = 'auto',
         sections = {
           lualine_a = { 'mode' },
           lualine_b = { 'branch' },
@@ -72,8 +73,6 @@ return {
             end,
           },
         },
-        --- @usage 'rose-pine' | 'rose-pine-alt'
-        theme = 'rose-pine',
       },
     }
   end,

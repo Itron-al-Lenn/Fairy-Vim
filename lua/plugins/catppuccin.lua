@@ -4,16 +4,31 @@ return {
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'rose-pine/neovim',
-    as = 'rose-pine',
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
-      require('rose-pine').setup {
-        styles = {
-          transparency = true,
+      require('catppuccin').setup {
+        flavor = 'mocha',
+        transparent_background = true,
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          treesitter = true,
+          notify = true,
+          mason = true,
+          neotree = true,
+          noice = true,
+          which_key = true,
         },
-        highlight_groups = {
-          CursorLine = { fg = 'rgb(25, 23, 36 / 0.75)', bg = 'rgb(25, 23, 36 / 0.75)' },
+        default_integrations = true,
+        highlight_overrides = {
+          mocha = function(mocha)
+            return {
+              Comment = { fg = mocha.pink },
+              CursorLine = { bg = 'none', style = { 'underline' } },
+            }
+          end,
         },
       }
     end,
@@ -21,7 +36,7 @@ return {
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'rose-pine'
+      vim.cmd.colorscheme 'catppuccin'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
