@@ -1,0 +1,7 @@
+{
+	"regex": {
+        "prefix": ";",
+        "body":  "${TM_CURRENT_WORD/.*/FOOBAR/}",
+        "description": "fraction"
+    }
+}

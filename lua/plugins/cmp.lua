@@ -16,11 +16,11 @@ return {
           return 'make install_jsregexp'
         end)(),
         config = function()
-          require('luasnip').config.set_config {
+          require('luasnip').setup {
             enable_autosnippets = true,
           }
-          require('luasnip.loaders.from_lua').lazy_load { paths = './luasnippets' }
-          require('luasnip.loaders.from_lua').load { lazy_paths = './luasnippets' }
+          require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/lua/snippets/luasnip' }
+          require('luasnip.loaders.from_lua').lazy_load()
         end,
         dependencies = {
           -- `friendly-snippets` contains a variety of premade snippets.
@@ -32,6 +32,14 @@ return {
           --     require('luasnip.loaders.from_vscode').lazy_load()
           --   end,
           -- },
+          {
+            'iurimateus/luasnip-latex-snippets.nvim',
+            config = function()
+              require('luasnip-latex-snippets').setup {
+                use_treesitter = true,
+              }
+            end,
+          },
         },
       },
       'saadparwaiz1/cmp_luasnip',
@@ -109,6 +117,7 @@ return {
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
+          { name = 'neorg' },
           {
             name = 'lazydev',
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
@@ -117,6 +126,17 @@ return {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+        },
+        sorting = {
+          comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
         },
       }
     end,
