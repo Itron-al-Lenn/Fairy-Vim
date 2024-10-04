@@ -34,13 +34,21 @@ return {
       },
       config = {
         header = vim.split(logo, '\n'),
-        -- stylua: ignore
         center = {
-          { action = 'Telescope find_files hidden=true',                             desc = ' Find Files',      icon = ' ',  key = 'f' },
-          { action = 'Telescope oldfiles hidden=true',                               desc = ' Recent Files',    icon = ' ',  key = 'r' },
-          { action = 'Telescope find_files hidden=true search_dirs=' .. vim.fn.stdpath('config'), desc = ' Config',          icon = ' ',  key = 'c' },
-          { action = 'Lazy',                                             desc = ' Lazy',            icon = '󰒲 ',  key = 'l' },
-          { action = function() vim.api.nvim_input('<cmd>qa<cr>') end,   desc = ' Quit',            icon = ' ',  key = 'q' },
+          { action = 'Telescope find_files hidden=true', desc = ' Find Files', icon = ' ', key = 'f' },
+          { action = 'Telescope oldfiles hidden=true', desc = ' Recent Files', icon = ' ', key = 'r' },
+          { action = '<CMD>Oil<CR>', desc = ' Open in Oil', icon = ' ', key = 'o' },
+          { action = 'Telescope find_files hidden=true search_dirs=' .. vim.fn.stdpath 'config', desc = ' Config', icon = ' ', key = 'c' },
+          { action = 'cd ' .. vim.fn.stdpath 'config' .. '/lua/plugins | ene | startinsert', desc = ' New Plugin', icon = ' ', key = 'C' },
+          { action = 'Lazy', desc = ' Lazy', icon = '󰒲 ', key = 'l' },
+          {
+            action = function()
+              vim.api.nvim_input '<cmd>qa<cr>'
+            end,
+            desc = ' Quit',
+            icon = ' ',
+            key = 'q',
+          },
         },
         footer = require('fortune').get_fortune(),
       },
