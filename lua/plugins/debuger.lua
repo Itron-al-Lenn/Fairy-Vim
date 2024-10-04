@@ -25,46 +25,87 @@ return {
     'mfussenegger/nvim-dap',
     recommended = true,
     desc = 'Debugging support. Requires language specific adapters to be configured. (see lang extras)',
-
+    -- Configure language specific adapters
+    opts = function()
+      local dap = require 'dap'
+      if not dap.adapters['codelldb'] then
+        require('dap').adapters['codelldb'] = {
+          type = 'server',
+          host = 'localhost',
+          port = '${port}',
+          executable = {
+            command = 'codelldb',
+            args = {
+              '--port',
+              '${port}',
+            },
+          },
+        }
+      end
+      for _, lang in ipairs { 'c', 'cpp' } do
+        dap.configurations[lang] = {
+          {
+            type = 'codelldb',
+            request = 'launch',
+            name = 'Launch file',
+            program = function()
+              return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            end,
+            cwd = '${workspaceFolder}',
+          },
+          {
+            type = 'codelldb',
+            request = 'attach',
+            name = 'Attach to process',
+            pid = require('dap.utils').pick_process,
+            cwd = '${workspaceFolder}',
+          },
+        }
+      end
+    end,
     dependencies = {
+      {
+        'williamboman/mason.nvim',
+        optional = true,
+        opts = { ensure_installed = { 'codelldb' } },
+      },
       'rcarriga/nvim-dap-ui',
       {
         'jbyuki/one-small-step-for-vimkind',
-      -- stylua: ignore
-      config = function()
-        local dap = require("dap")
-        dap.adapters.nlua = function(callback, conf)
-          local adapter = {
-            type = "server",
-            host = conf.host or "127.0.0.1",
-            port = conf.port or 8086,
-          }
-          if conf.start_neovim then
-            local dap_run = dap.run
-            dap.run = function(c)
-              adapter.port = c.port
-              adapter.host = c.host
+        config = function()
+          local dap = require 'dap'
+          dap.adapters.nlua = function(callback, conf)
+            local adapter = {
+              type = 'server',
+              host = conf.host or '127.0.0.1',
+              port = conf.port or 8086,
+            }
+            if conf.start_neovim then
+              local dap_run = dap.run
+              dap.run = function(c)
+                adapter.port = c.port
+                adapter.host = c.host
+              end
+              require('osv').run_this()
+              dap.run = dap_run
             end
-            require("osv").run_this()
-            dap.run = dap_run
+            callback(adapter)
           end
-          callback(adapter)
-        end
-        dap.configurations.lua = {
-          {
-            type = "nlua",
-            request = "attach",
-            name = "Run this file",
-            start_neovim = {},
-          },
-          {
-            type = "nlua",
-            request = "attach",
-            name = "Attach to running Neovim instance (port = 8086)",
-            port = 8086,
-          },
-        }
-      end,
+          dap.configurations.lua = {
+            {
+              type = 'nlua',
+              request = 'attach',
+              name = 'Run this file',
+              start_neovim = {},
+            },
+            {
+              type = 'nlua',
+              request = 'attach',
+              name = 'Attach to running Neovim instance (port = 8086)',
+              port = 8086,
+            },
+          }
+        end,
       },
       -- virtual text for the debugger
       {
@@ -94,40 +135,14 @@ return {
     { "<leader>cdt", function() require("dap").terminate() end, desc = "Terminate" },
     { "<leader>cdw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
   },
-
-    config = function()
-      -- load mason-nvim-dap here, after all adapters have been setup
-      if LazyVim.has 'mason-nvim-dap.nvim' then
-        require('mason-nvim-dap').setup(LazyVim.opts 'mason-nvim-dap.nvim')
-      end
-
-      vim.api.nvim_set_hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
-
-      for name, sign in pairs(LazyVim.config.icons.dap) do
-        sign = type(sign) == 'table' and sign or { sign }
-        vim.fn.sign_define('Dap' .. name, { text = sign[1], texthl = sign[2] or 'DiagnosticInfo', linehl = sign[3], numhl = sign[3] })
-      end
-
-      -- setup dap config by VsCode launch.json file
-      local vscode = require 'dap.ext.vscode'
-      local json = require 'plenary.json'
-      vscode.json_decode = function(str)
-        return vim.json.decode(json.json_strip_comments(str))
-      end
-
-      -- Extends dap.configurations with entries read from .vscode/launch.json
-      if vim.fn.filereadable '.vscode/launch.json' then
-        vscode.load_launchjs()
-      end
-    end,
   },
   {
     'rcarriga/nvim-dap-ui',
     dependencies = { 'nvim-neotest/nvim-nio' },
   -- stylua: ignore
   keys = {
-    { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
-    { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
+    { "<leader>cdu", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
+    { "<leader>cde", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
   },
     opts = {},
     config = function(_, opts)

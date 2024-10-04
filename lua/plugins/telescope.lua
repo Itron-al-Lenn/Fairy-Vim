@@ -6,6 +6,15 @@
 -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
 return {
+  {
+    'ibhagwan/fzf-lua',
+    -- optional for icon support
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      -- calling `setup` is optional for customization
+      require('fzf-lua').setup {}
+    end,
+  },
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -72,6 +81,8 @@ return {
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'luasnip')
+      pcall(require('telescope').load_extension, 'dap')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -108,6 +119,10 @@ return {
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
     end,
+  },
+  {
+    'benfowler/telescope-luasnip.nvim',
+    module = 'telescope._extensions.luasnip', -- if you wish to lazy-load
   },
 }
 -- vim: ts=2 sts=2 sw=2 et
