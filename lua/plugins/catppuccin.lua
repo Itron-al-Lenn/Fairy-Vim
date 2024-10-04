@@ -26,6 +26,7 @@ return {
           mocha = function(mocha)
             return {
               Comment = { fg = mocha.pink },
+              LineNr = { fg = mocha.overlay0 },
               CursorLine = { bg = 'none', style = { 'underline' } },
             }
           end,
