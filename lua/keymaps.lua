@@ -1,6 +1,5 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
-
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -31,6 +30,10 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Make d truely delete (content won't be stored in the register). Use x to cut
+vim.keymap.set({'n', 'v'}, 'd', '"_d', { desc = 'delete' })
+vim.keymap.set('n', 'D', '"_D', { desc = 'delete until end of line' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -42,6 +45,29 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
+  end,
+})
+
+-- [[ Todo-Comments ]]
+vim.keymap.set('n', ']t', function()
+  require('todo-comments').jump_next()
+end, { desc = 'Next todo comment' })
+
+vim.keymap.set('n', '[t', function()
+  require('todo-comments').jump_prev()
+end, { desc = 'Previous todo comment' })
+
+-- You can also specify a list of valid jump keywords
+
+vim.keymap.set('n', ']t', function()
+  require('todo-comments').jump_next { keywords = { 'ERROR', 'WARNING' } }
+end, { desc = 'Next error/warning todo comment' })
+
+-- [[ Neorg ]]
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = 'norg',
+  callback = function()
+    vim.keymap.set('n', '<CR>', '<Plug>(neorg.esupports.hop.hop-link)', { buffer = true })
   end,
 })
 
