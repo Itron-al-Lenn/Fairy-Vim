@@ -49,6 +49,7 @@ return {
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'R-nvim/cmp-r',
     },
     config = function()
       -- See `:help cmp`
@@ -118,6 +119,7 @@ return {
         },
         sources = {
           { name = 'neorg' },
+          { name = 'cmp_r' },
           {
             name = 'lazydev',
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it

@@ -1,3 +1,4 @@
+local util = require 'util.util'
 -- LSP Plugins
 return {
   {
@@ -174,7 +175,8 @@ return {
             clangdFileStatus = true,
           },
         },
-        pyright = {},
+        basedpyright = {},
+        texlab = {},
         lua_ls = {
           settings = {
             Lua = {
