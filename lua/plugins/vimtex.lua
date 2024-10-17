@@ -14,9 +14,6 @@ return {
 
       -- treesitter handles highlights
       g.vimtex_syntax_enabled = false
-
-      -- compilation handled by LSP (texlab)
-      g.vimtex_compiler_enabled = false
     end,
   },
 }
