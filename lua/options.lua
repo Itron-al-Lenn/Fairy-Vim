@@ -3,16 +3,15 @@
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
--- Make line numbers default
-vim.opt.number = true
--- You can also add relative line numbers, to help with jumping.
+-- Enable relative line numbers
 vim.opt.relativenumber = true
-
--- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = 'a'
+vim.opt.number = true
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
+
+-- Disable mouse
+vim.opt.mouse = ''
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -66,5 +65,25 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+--- Filetypes to enable spellcheck
+local spell_types = { 'text', 'plaintex', 'latex', 'tex', 'typst', 'gitcommit', 'markdown' }
+vim.opt.spelllang = 'en_gb'
+
+-- Set global spell option to false initially to disable it for all file types
+vim.opt.spell = false
+
+-- Create an augroup for spellcheck to group related autocommands
+vim.api.nvim_create_augroup('Spellcheck', { clear = true })
+
+-- Create an autocommand to enable spellcheck for specified file types
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  group = 'Spellcheck', -- Grouping the command for easier management
+  pattern = spell_types, -- Only apply to these file types
+  callback = function()
+    vim.opt_local.spell = true -- Enable spellcheck for these file types
+  end,
+  desc = 'Enable spellcheck for defined filetypes', -- Description for clarity
+})
 
 -- vim: ts=2 sts=2 sw=2 et
