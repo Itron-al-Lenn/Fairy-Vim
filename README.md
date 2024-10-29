@@ -16,3 +16,4 @@
      ^----~"`                                           ~`                                                           
 
 ```
+My personal Neovim config. It was initially based on [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) but has been heavily modified by myself.
