@@ -1,4 +1,11 @@
 return {
+  {
+    -- better-escape - makes jk more smooth
+    'max397574/better-escape.nvim',
+    config = function()
+      require('better_escape').setup()
+    end,
+  },
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -36,5 +43,17 @@ return {
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+  {
+    -- autopairs - adds the second kind in a pair ) to ( par exemple
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    dependencies = { 'hrsh7th/nvim-cmp' },
+    config = function()
+      require('nvim-autopairs').setup {}
+      -- If you want to automatically add `(` after selecting a function or method
+      local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+      local cmp = require 'cmp'
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    end,
+  },
 }
--- vim: ts=2 sts=2 sw=2 et
