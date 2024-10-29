@@ -21,6 +21,7 @@ require('lazy').setup {
     { import = 'plugins/lang' },
   },
   install = { colorscheme = { 'catppuccin' } },
+  dev = { path = '~/projects/nvim-plugins', fallback = false },
   checker = { enabled = true },
 }
 
