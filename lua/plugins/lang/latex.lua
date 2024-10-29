@@ -13,4 +13,10 @@ return {
       g.vimtex_syntax_enabled = false
     end,
   },
+  {
+    'iurimateus/luasnip-latex-snippets.nvim',
+    config = function()
+      require('luasnip.loaders.from_lua').load()
+    end,
+  },
 }

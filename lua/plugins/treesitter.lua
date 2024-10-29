@@ -3,6 +3,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
+      ignore_install = { 'latex' },
       ensure_installed = {
         'bash',
         'r',
