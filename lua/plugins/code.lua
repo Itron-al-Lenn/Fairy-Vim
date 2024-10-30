@@ -30,6 +30,7 @@ return {
         lua = { 'stylua' },
         python = { 'isort', 'ruff_format' },
         c = { 'clang-format' },
+        rust = { 'rustfmt' },
       },
     },
   },
@@ -154,7 +155,8 @@ return {
       -- You'll need to check that you have the required things installed
       -- online, please don't ask me how to install them :)
       ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
+        'codelldb',
+        'python',
       },
     },
     -- mason-nvim-dap is loaded when nvim-dap loads
@@ -163,44 +165,13 @@ return {
   {
     -- dap - debug handling
     'mfussenegger/nvim-dap',
-    recommended = true,
-    desc = 'Debugging support. Requires language specific adapters to be configured. (see lang extras)',
     -- Configure language specific adapters
-    opts = function()
-      local dap = require 'dap'
-      if not dap.adapters['codelldb'] then
-        require('dap').adapters['codelldb'] = {
-          type = 'server',
-          host = 'localhost',
-          port = '${port}',
-          executable = {
-            command = 'codelldb',
-            args = {
-              '--port',
-              '${port}',
-            },
-          },
-        }
-      end
-      for _, lang in ipairs { 'c', 'cpp' } do
-        dap.configurations[lang] = {
-          {
-            type = 'codelldb',
-            request = 'launch',
-            name = 'Launch file',
-            program = function()
-              return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-            end,
-            cwd = '${workspaceFolder}',
-          },
-          {
-            type = 'codelldb',
-            request = 'attach',
-            name = 'Attach to process',
-            pid = require('dap.utils').pick_process,
-            cwd = '${workspaceFolder}',
-          },
-        }
+    config = function()
+      vim.api.nvim_set_hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
+      local vscode = require 'dap.ext.vscode'
+      local json = require 'plenary.json'
+      vscode.json_decode = function(str)
+        return vim.json.decode(json.json_strip_comments(str))
       end
     end,
     dependencies = {
@@ -409,7 +380,16 @@ return {
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
-      'williamboman/mason-lspconfig.nvim',
+      {
+        'williamboman/mason-lspconfig.nvim',
+        opts = {
+          setup = {
+            rust_analyzer = function()
+              return true
+            end,
+          },
+        },
+      },
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
