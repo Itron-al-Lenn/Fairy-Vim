@@ -56,4 +56,18 @@ return {
       cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
     end,
   },
+  {
+    'zk-org/zk-nvim',
+    keys = {
+      { '<leader>z', '', desc = '[Z]ettelkasten', mode = 'n' },
+      { '<leader>zo', "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", desc = '[O]pen Zettel', mode = 'n' },
+      { '<leader>zn', "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", desc = '[N]ew Zettel', mode = 'n' },
+      { '<leader>zt', '<Cmd>ZkTags<CR>', desc = 'Open Zettel with [T]ag', mode = 'n' },
+      { '<leader>zf', "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", desc = '[F]ind Zettel', mode = 'n' },
+      { '<leader>zf', ":'<,'>ZkMatch<CR>", desc = '[F]ind Zettel matching selection', mode = 'v' },
+    },
+    config = function()
+      require('zk').setup {}
+    end,
+  },
 }
