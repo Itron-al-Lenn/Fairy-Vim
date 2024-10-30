@@ -57,6 +57,17 @@ return {
     end,
   },
   {
+    'letieu/wezterm-move.nvim',
+    lazy = false,
+    -- stylua: ignore
+    keys = {
+      { "<C-h>", function() require("wezterm-move").move "h" end },
+      { "<C-j>", function() require("wezterm-move").move "j" end },
+      { "<C-k>", function() require("wezterm-move").move "k" end },
+      { "<C-l>", function() require("wezterm-move").move "l" end },
+    },
+  },
+  {
     'zk-org/zk-nvim',
     keys = {
       { '<leader>z', '', desc = '[Z]ettelkasten', mode = 'n' },
