@@ -1,6 +1,6 @@
 -- Get the colours from my terminal
 package.path = package.path .. ';' .. vim.fn.expand '$HOME' .. '/.config/wezterm/util/?.lua;'
-local overrides = require('colours').current_colours
+local overrides = require('colours').current_colours or require 'util.colours'
 
 return {
   { -- You can easily change to a different colorscheme.
