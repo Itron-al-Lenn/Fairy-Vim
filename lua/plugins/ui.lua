@@ -1,6 +1,3 @@
-package.path = package.path .. ';' .. vim.fn.expand '$HOME' .. '/.luarocks/share/lua/5.1/?/init.lua;'
-package.path = package.path .. ';' .. vim.fn.expand '$HOME' .. '/.luarocks/share/lua/5.1/?.lua;'
-
 return {
   {
     -- dashboard - adds a dashboard when running nvim without argument
@@ -152,7 +149,6 @@ return {
   {
     -- image - adds image support
     '3rd/image.nvim',
-    ft = 'markdown',
   },
   {
     -- helpview - makes the help looks nicer

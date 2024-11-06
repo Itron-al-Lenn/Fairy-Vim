@@ -23,6 +23,10 @@ require('lazy').setup {
   install = { colorscheme = { 'catppuccin' } },
   dev = { path = '~/projects/nvim-plugins', fallback = false },
   checker = { enabled = true },
+  rocks = {
+    root = vim.fn.stdpath 'data' .. '/lazy-rocks',
+    server = 'https://nvim-neorocks.github.io/rocks-binaries/',
+  },
 }
 
 -- vim: ts=2 sts=2 sw=2 et
