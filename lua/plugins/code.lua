@@ -27,6 +27,8 @@ return {
         }
       end,
       formatters_by_ft = {
+        html = { 'prettier' },
+        css = { 'prettier' },
         lua = { 'stylua' },
         python = { 'isort', 'ruff_format' },
         c = { 'clang-format' },
@@ -511,6 +513,8 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
+        html = {},
+        cssls = {},
         clangd = {
           keys = {
             { '<leader>ch', '<cmd>ClangdSwitchSourceHeader<cr>', desc = 'Switch Source/Header (C/C++)' },
@@ -616,6 +620,7 @@ return {
         'cpp',
         'diff',
         'html',
+        'css',
         'lua',
         'luadoc',
         'markdown',
