@@ -301,4 +301,15 @@ return {
       }
     end,
   },
+  {
+    'uga-rosa/ccc.nvim',
+    opts = {
+      -- Your preferred settings
+      -- Example: enable highlighter
+      highlighter = {
+        auto_enable = true,
+        lsp = true,
+      },
+    },
+  },
 }
