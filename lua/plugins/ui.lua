@@ -147,10 +147,6 @@ return {
     },
   },
   {
-    -- image - adds image support
-    '3rd/image.nvim',
-  },
-  {
     -- helpview - makes the help looks nicer
     'OXY2DEV/helpview.nvim',
   },
@@ -310,6 +306,18 @@ return {
         auto_enable = true,
         lsp = true,
       },
+    },
+    {
+      -- tiny-inline-diagnostic - shows only the diagnostics on the line with the cursor
+      'rachartier/tiny-inline-diagnostic.nvim',
+      event = 'VeryLazy', -- Or `LspAttach`
+      priority = 1000, -- needs to be loaded in first
+      config = function()
+        require('tiny-inline-diagnostic').setup {
+          preset = 'classic',
+        }
+        vim.diagnostic.config { virtual_text = false } -- Only if needed in your configuration, if you already have native LSP diagnostics
+      end,
     },
   },
 }

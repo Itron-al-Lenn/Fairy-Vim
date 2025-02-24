@@ -1,8 +1,4 @@
 -- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
-
 -- Enable relative line numbers
 vim.opt.relativenumber = true
 vim.opt.number = true
@@ -14,9 +10,6 @@ vim.opt.showmode = false
 vim.opt.mouse = ''
 
 -- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
