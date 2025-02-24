@@ -35,5 +35,3 @@ require 'lazy-config'
 
 -- [[ Snippets ]]
 vim.g.tex_flavor = 'latex'
-
--- vim: ts=2 sts=2 sw=2 et
