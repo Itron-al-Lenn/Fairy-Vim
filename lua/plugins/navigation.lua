@@ -35,12 +35,7 @@ return {
   {
     -- fzf - adds fzf to nvim
     'ibhagwan/fzf-lua',
-    -- optional for icon support
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      -- calling `setup` is optional for customization
-      require('fzf-lua').setup {}
-    end,
   },
   {
     -- telescope - handy tool to search ALL things
