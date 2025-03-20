@@ -1,11 +1,4 @@
 return {
-  {
-    -- better-escape - makes jk more smooth
-    'max397574/better-escape.nvim',
-    config = function()
-      require('better_escape').setup()
-    end,
-  },
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()

@@ -1,5 +1,12 @@
 return {
   {
+    -- better-escape - makes jk more smooth
+    'max397574/better-escape.nvim',
+    config = function()
+      require('better_escape').setup()
+    end,
+  },
+  {
     -- arrow - allows for jumping between marked files
     'otavioschwanck/arrow.nvim',
     opts = {
