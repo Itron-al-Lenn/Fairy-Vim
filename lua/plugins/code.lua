@@ -25,33 +25,14 @@ return {
     },
   },
   {
-    -- cmp - engine for handling autocompletion
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
-    dependencies = {
-      {
-        'L3MON4D3/LuaSnip',
-        build = (function()
-          if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-            return
-          end
-          return 'make install_jsregexp'
-        end)(),
-      },
-      'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-      'R-nvim/cmp-r',
+    -- LuaSnip - Absolutly overcomplicated snippets. Mainly for LaTeX
+    'L3MON4D3/LuaSnip',
+    build = 'make install_jsregexp',
+    opts = {
+      enable_autosnippets = true,
+      update_events = { 'TextChanged', 'TextChangedI' },
     },
-    config = function()
-      local cmp = require 'cmp'
-      local luasnip = require 'luasnip'
-
-      -- LuaSnip config
-      luasnip.config.setup {
-        enable_autosnippets = true,
-        update_events = { 'TextChanged', 'TextChangedI' },
-      }
+    init = function()
       local lua_s_path = './lua/snippets/luasnip/'
       require('luasnip.loaders.from_lua').load { paths = lua_s_path }
       require('luasnip.loaders.from_snipmate').lazy_load { paths = './lua/snippets/snipmate' }
