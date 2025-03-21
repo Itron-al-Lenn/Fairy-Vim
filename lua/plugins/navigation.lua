@@ -41,5 +41,6 @@ return {
     -- todo-comments - adds the option to navigate between todo-comments
     'folke/todo-comments.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {},
   },
 }
