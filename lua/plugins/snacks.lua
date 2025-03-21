@@ -4,14 +4,16 @@ return {
     priority = 1000,
     lazy = false,
     ---@type snacks.Config
+    opts = {
+      picker = { enter = true },
+    },
+    -- stylua: ignore
     keys = {
-      {
-        '<leader>ol',
-        function()
-          Snacks.lazygit()
-        end,
-        desc = '[O]pen [L]azygit',
-      },
+      { "<leader>sf", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+      { "<leader>sg", function() Snacks.picker.grep() end,  desc = "Grep" },
+      { '<leader>ol', function() Snacks.lazygit() end,      desc = '[O]pen [L]azygit'},
+      { "<leader>on", function() Snacks.picker.notifications(); vim.cmd.stopinsert() end, desc = "Notification History" },
+      { '<leader>q',  function() Snacks.picker.diagnostics_buffer(); end, desc = 'Open diagnostic [Q]uickfix list' },
     },
   },
 }

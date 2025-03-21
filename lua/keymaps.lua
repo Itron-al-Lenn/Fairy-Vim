@@ -2,9 +2,6 @@
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
 -- Disable <C-c> to get rid of the bad habit and get jk into muscle memory.
 vim.keymap.set('i', '<C-c>', '<cmd>echo "Use jk to exit insert mode!!"<CR>')
 
