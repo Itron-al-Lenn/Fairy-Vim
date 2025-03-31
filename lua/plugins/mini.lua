@@ -11,6 +11,10 @@ return {
 
       -- Autopair for brackets, ...
       require('mini.pairs').setup()
+
+      -- Git diff signs
+      require('mini.diff').setup()
+
       -- Icons
       require('mini.icons').setup()
     end,
