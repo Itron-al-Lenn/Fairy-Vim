@@ -11,6 +11,8 @@ return {
 
       -- Autopair for brackets, ...
       require('mini.pairs').setup()
+      -- Icons
+      require('mini.icons').setup()
     end,
   },
 }

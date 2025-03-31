@@ -286,6 +286,7 @@ return {
     event = 'VimEnter',
     config = function()
       require('which-key').setup()
+    dependencies = { 'echasnovski/mini.nvim' },
       require('which-key').add {
         { '<leader>c', group = '[C]ode' },
         { '<leader>d', group = '[D]ocument' },

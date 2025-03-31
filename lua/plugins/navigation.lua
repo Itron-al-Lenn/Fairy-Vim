@@ -35,7 +35,8 @@ return {
   {
     -- fzf - adds fzf to nvim
     'ibhagwan/fzf-lua',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = { 'echasnovski/mini.nvim' },
+    opts = {},
   },
   {
     -- todo-comments - adds the option to navigate between todo-comments
