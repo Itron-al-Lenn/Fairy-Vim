@@ -1,6 +1,14 @@
 local overrides = require('util.colours').current_colours
 
 return {
+  {
+    'rebelot/kanagawa.nvim',
+    name = 'kanagawa',
+    priority = 1000,
+    init = function()
+      vim.cmd.colorscheme 'catppuccin'
+    end,
+  },
   -- Theme - Based on catppuccin but overrideswith the colours defined in util.colours
   {
     'catppuccin/nvim',
@@ -9,15 +17,12 @@ return {
     config = function()
       require('catppuccin').setup {
         flavor = 'mocha',
-        transparent_background = true,
+        transparent_background = not vim.g.neovide,
         integrations = {
-          cmp = true,
-          gitsigns = true,
-          treesitter = true,
-          notify = true,
+          blink_cmp = true,
           mason = true,
-          neotree = true,
           noice = true,
+          snacks = { enabled = true },
           which_key = true,
         },
         default_integrations = true,
@@ -64,9 +69,6 @@ return {
           end,
         },
       }
-    end,
-    init = function()
-      vim.cmd.colorscheme 'catppuccin'
     end,
   },
 }
