@@ -4,6 +4,7 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
+      image = { enabled = true },
       picker = { enter = true },
       notifier = { enabled = true },
       toggle = { enabled = true },
