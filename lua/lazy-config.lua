@@ -28,5 +28,3 @@ require('lazy').setup {
     server = 'https://nvim-neorocks.github.io/rocks-binaries/',
   },
 }
-
--- vim: ts=2 sts=2 sw=2 et

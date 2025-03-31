@@ -1,4 +1,4 @@
-```
+```markdown
     .....                         .                                                         .                        
  .H8888888x.  '`+                @88>                 ..                                   @88>                      
 :888888888888x.  !               %8P      .u    .    @L                  ...     ..        %8P      ..    .     :    
@@ -17,3 +17,4 @@
 
 ```
 My personal Neovim config. It was initially based on [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) but has been heavily modified by myself.
+
