@@ -1,9 +1,7 @@
 local ls = require 'luasnip'
 local s = ls.snippet
 local autos = ls.extend_decorator.apply(s, { snippetType = 'autosnippet' })
-local i = ls.insert_node
 local f = ls.function_node
-local fmta = require('luasnip.extras.fmt').fmta
 
 local greek = {
   A = 'lpha',

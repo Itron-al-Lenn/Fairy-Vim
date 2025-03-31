@@ -1,26 +1,28 @@
 local overrides = require('util.colours').current_colours
 
 return {
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+  {
+    'rebelot/kanagawa.nvim',
+    name = 'kanagawa',
+    priority = 1000,
+    init = function()
+      vim.cmd.colorscheme 'catppuccin'
+    end,
+  },
+  -- Theme - Based on catppuccin but overrideswith the colours defined in util.colours
+  {
     'catppuccin/nvim',
     name = 'catppuccin',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+    priority = 1000,
     config = function()
       require('catppuccin').setup {
         flavor = 'mocha',
-        transparent_background = true,
+        transparent_background = not vim.g.neovide,
         integrations = {
-          cmp = true,
-          gitsigns = true,
-          treesitter = true,
-          notify = true,
+          blink_cmp = true,
           mason = true,
-          neotree = true,
           noice = true,
+          snacks = { enabled = true },
           which_key = true,
         },
         default_integrations = true,
@@ -63,17 +65,11 @@ return {
             return {
               LineNr = { fg = mocha.overlay1 },
               CursorLine = { bg = 'none', style = { 'underline' } },
+              SnacksDashboardHeader = { fg = mocha.text },
             }
           end,
         },
       }
     end,
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'catppuccin'
-    end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et

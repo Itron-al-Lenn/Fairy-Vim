@@ -2,9 +2,6 @@
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
 -- Disable <C-c> to get rid of the bad habit and get jk into muscle memory.
 vim.keymap.set('i', '<C-c>', '<cmd>echo "Use jk to exit insert mode!!"<CR>')
 
@@ -14,13 +11,6 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
--- -- Keybinds to make split navigation easier.
--- --  Use CTRL+<hjkl> to switch between windows
--- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
--- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
--- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
--- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
---
 -- Make d truely delete (content won't be stored in the register). Use x to cut
 vim.keymap.set({ 'n', 'v' }, 'd', '"_d', { desc = 'delete' })
 vim.keymap.set('n', 'D', '"_D', { desc = 'delete until end of line' })

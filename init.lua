@@ -21,9 +21,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
--- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = true
-
 -- [[ Setting options ]]
 require 'options'
 
@@ -33,7 +30,13 @@ require 'keymaps'
 -- [[ Configure and install plugin manager ]]
 require 'lazy-config'
 
+-- [[ LSP Config ]]
+require 'lsp'
+
 -- [[ Snippets ]]
 vim.g.tex_flavor = 'latex'
 
--- vim: ts=2 sts=2 sw=2 et
+-- [[ Neovide ]]
+if vim.g.neovide then
+  require 'neovide'
+end
