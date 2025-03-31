@@ -67,6 +67,7 @@ return {
     build = ':TSUpdate',
     opts = {
       ensure_installed = {
+        'python',
         'bash',
         'rust',
         'yaml',
@@ -83,11 +84,8 @@ return {
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
+      highlight = { enable = true },
+      indent = { enable = true },
     },
   },
 }
