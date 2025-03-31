@@ -35,3 +35,8 @@ require 'lazy-config'
 
 -- [[ Snippets ]]
 vim.g.tex_flavor = 'latex'
+
+-- [[ Neovide ]]
+if vim.g.neovide then
+  require 'neovide'
+end
