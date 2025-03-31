@@ -30,6 +30,9 @@ require 'keymaps'
 -- [[ Configure and install plugin manager ]]
 require 'lazy-config'
 
+-- [[ LSP Config ]]
+require 'lsp'
+
 -- [[ Snippets ]]
 vim.g.tex_flavor = 'latex'
 
