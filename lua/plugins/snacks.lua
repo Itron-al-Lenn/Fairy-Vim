@@ -7,6 +7,7 @@ return {
       picker = { enter = true },
       notifier = { enabled = true },
       toggle = { enabled = true },
+      statuscolumn = { enabled = true },
     },
     -- stylua: ignore
     keys = {
