@@ -5,6 +5,7 @@ return {
     lazy = false,
     opts = {
       picker = { enter = true },
+      notifier = { enabled = true },
       toggle = { enabled = true },
     },
     -- stylua: ignore
