@@ -1,14 +1,4 @@
-return {
-  {
-    -- dashboard - adds a dashboard when running nvim without argument
-    'nvimdev/dashboard-nvim',
-    lazy = false, -- As https://github.com/nvimdev/dashboard-nvim/pull/450, dashboard-nvim shouldn't be lazy-loaded to properly handle stdin.
-    dependencies = {
-      -- fortune - adds quotes to dashboard
-      'Itron-al-Lenn/fortune.nvim',
-    },
-    opts = function()
-      local logo = [[
+local logo = [[
     .....                         .                                                         .                        
  .H8888888x.  '`+                @88>                 ..                                   @88>                      
 :888888888888x.  !               %8P      .u    .    @L                  ...     ..        %8P      ..    .     :    
@@ -24,65 +14,35 @@ return {
  '888       X88f                                           98"             %888888x.-`                               
   '%8:     .8*"                                          ./"                 ""**""                                  
      ^----~"`                                           ~`                                                           
-    ]]
+]]
 
-      logo = string.rep('\n', 8) .. logo .. '\n\n'
-
-      local opts = {
-        theme = 'doom',
-        hide = {
-          -- this is taken care of by lualine
-          -- enabling this messes up the actual laststatus setting after loading a file
-          statusline = false,
-        },
-        config = {
-          header = vim.split(logo, '\n'),
-          center = {
-            { action = 'Telescope find_files hidden=true', desc = ' Find Files', icon = ' ', key = 'f' },
-            { action = 'Telescope oldfiles hidden=true', desc = ' Recent Files', icon = ' ', key = 'r' },
-            { action = '<CMD>Oil<CR>', desc = ' Open in Oil', icon = ' ', key = 'o' },
-            { action = 'Telescope find_files hidden=true search_dirs=' .. vim.fn.stdpath 'config', desc = ' Config', icon = ' ', key = 'c' },
-            { action = 'cd ' .. vim.fn.stdpath 'config' .. '/lua/plugins | ene | startinsert', desc = ' New Plugin', icon = ' ', key = 'C' },
-            { action = 'Lazy', desc = ' Lazy', icon = '󰒲 ', key = 'l' },
-            {
-              action = function()
-                vim.api.nvim_input '<cmd>qa<cr>'
-              end,
-              desc = ' Quit',
-              icon = ' ',
-              key = 'q',
-            },
+return {
+  {
+    'folke/snacks.nvim',
+    lazy = false,
+    opts = {
+      dashboard = {
+        preset = {
+          header = logo,
+          keys = {
+            { icon = ' ', key = 'f', desc = 'Find File', action = ":lua Snacks.dashboard.pick('files')" },
+            { icon = ' ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
+            { icon = ' ', key = 'g', desc = 'Find Text', action = ":lua Snacks.dashboard.pick('live_grep')" },
+            { icon = ' ', key = 'r', desc = 'Recent Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
+            { icon = ' ', key = 'c', desc = 'Config', action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+            { icon = '󰒲 ', key = 'l', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
+            { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
           },
-          footer = require('fortune').get_fortune(),
         },
-      }
-
-      for _, button in ipairs(opts.config.center) do
-        button.desc = button.desc .. string.rep(' ', 43 - #button.desc)
-        button.key_format = '  %s'
-      end
-
-      -- open dashboard after closing lazy
-      if vim.o.filetype == 'lazy' then
-        vim.api.nvim_create_autocmd('WinClosed', {
-          pattern = tostring(vim.api.nvim_get_current_win()),
-          once = true,
-          callback = function()
-            vim.schedule(function()
-              vim.api.nvim_exec_autocmds('UIEnter', { group = 'dashboard' })
-            end)
-          end,
-        })
-      end
-
-      -- change the color of the header
-      vim.api.nvim_set_hl(0, 'DashboardHeader', {
-        fg = '#cdd6f4',
-      })
-
-      return opts
-    end,
-  },
+        sections = {
+          { section = 'header', height = 16 },
+          { section = 'keys', gap = 1, padding = 2 },
+          {
+            footer = 'The worker of the world has nothing to lose, but their chains, workers of the world unite.\n-- Kari Marx',
+            width = 90,
+            align = 'center',
+          },
+        },
   {
     -- gitsigns - adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
