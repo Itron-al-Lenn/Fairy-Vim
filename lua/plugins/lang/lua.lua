@@ -9,6 +9,8 @@ return {
     library = {
       { path = 'luvit-meta/library', words = { 'vim%.uv' } },
       { path = 'wezterm-types', mods = { 'wezterm' } },
+      { path = 'LazyVim', words = { 'LazyVim' } },
+      { path = 'snacks.nvim', words = { 'Snacks' } },
     },
   },
 }
