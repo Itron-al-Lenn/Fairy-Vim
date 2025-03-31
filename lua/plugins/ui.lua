@@ -53,13 +53,11 @@ return {
   {
     -- lualine - creates a status bar at the bottom
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
     event = 'ColorScheme',
     config = function()
-      local icons = require 'util.icons'
       require('lualine').setup {
         options = {
-          theme = 'auto',
+          theme = 'gruvbox-material',
           sections = {
             lualine_a = { 'mode' },
             lualine_b = { 'branch' },
@@ -68,10 +66,10 @@ return {
               {
                 'diagnostics',
                 symbols = {
-                  error = icons.diagnostics.Error,
-                  warn = icons.diagnostics.Warn,
-                  info = icons.diagnostics.Info,
-                  hint = icons.diagnostics.Hint,
+                  error = ' ',
+                  warn = ' ',
+                  info = ' ',
+                  hint = ' ',
                 },
               },
               { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
@@ -89,20 +87,15 @@ return {
             },
             -- stylua: ignore
             {
-              function() return "  " .. require("dap").status() end,
-              cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
-            },
-            -- stylua: ignore
-            {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
             },
               {
                 'diff',
                 symbols = {
-                  added = icons.git.added,
-                  modified = icons.git.modified,
-                  removed = icons.git.removed,
+                  added = '+',
+                  modified = '~',
+                  removed = '-',
                 },
                 source = function()
                   local gitsigns = vim.b.gitsigns_status_dict
