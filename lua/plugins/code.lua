@@ -64,26 +64,30 @@ return {
   {
     -- treesitter - adds code highlighting (and a bit more...)
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
     build = ':TSUpdate',
-    opts = {
-      ensure_installed = {
-        'python',
-        'bash',
-        'rust',
-        'yaml',
-        'c',
-        'cpp',
-        'html',
-        'css',
-        'lua',
-        'luadoc',
-        'markdown',
-        'markdown_inline',
-        'vim',
-        'vimdoc',
-      },
-      auto_install = true,
-      indent = { enable = true },
-    },
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = {
+          'python',
+          'bash',
+          'rust',
+          'yaml',
+          'c',
+          'cpp',
+          'html',
+          'css',
+          'lua',
+          'luadoc',
+          'markdown',
+          'markdown_inline',
+          'vim',
+          'vimdoc',
+        },
+        auto_install = true,
+        highlight = { enable = true },
+        indent = { enable = true },
+      }
+    end,
   },
 }
