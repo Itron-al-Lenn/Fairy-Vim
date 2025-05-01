@@ -66,6 +66,7 @@ return {
               LineNr = { fg = mocha.overlay1 },
               CursorLine = { bg = 'none', style = { 'underline' } },
               SnacksDashboardHeader = { fg = mocha.text },
+              NoiceCmdlineIcon = { link = 'SnacksPickerIcon' },
             }
           end,
         },
