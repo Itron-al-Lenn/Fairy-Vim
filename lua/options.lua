@@ -1,3 +1,6 @@
+-- [[ Diagnostic options ]]
+require 'options.diagnostic'
+
 -- [[ Setting options ]]
 
 vim.opt.termguicolors = true
