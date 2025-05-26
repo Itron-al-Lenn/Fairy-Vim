@@ -21,7 +21,7 @@ require('lazy').setup {
     { import = 'plugins/lang' },
   },
   install = { colorscheme = { 'catppuccin' } },
-  dev = { path = '~/projects/nvim-plugins', fallback = false },
+  dev = { path = '~/projects/nvim-plugins', fallback = true },
   checker = { enabled = true },
   rocks = {
     root = vim.fn.stdpath 'data' .. '/lazy-rocks',
