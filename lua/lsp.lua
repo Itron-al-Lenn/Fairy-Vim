@@ -5,9 +5,9 @@ vim.lsp.config('*', {
   root_markers = { '.git' },
 })
 
-local files = util.get_files(vim.fn.stdpath 'config' .. '/lsp/')
-for _, file in ipairs(files) do
-  vim.lsp.enable(file:gsub('.lua', ''))
+local servers = require 'lsp-servers'
+for _, server in ipairs(servers) do
+  vim.lsp.enable(server)
 end
 
 -- stylua: ignore
