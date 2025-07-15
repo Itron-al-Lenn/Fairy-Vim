@@ -83,6 +83,7 @@ return {
     -- treesitter - adds code highlighting (and a bit more...)
     'nvim-treesitter/nvim-treesitter',
     lazy = false,
+    priority = 1000,
     build = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup {
